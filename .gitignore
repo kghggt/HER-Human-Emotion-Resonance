@@ -1,0 +1,46 @@
+# ── 🔐 敏感信息 / 隐私 ────────────────────────────────────────────────────────
+.env
+flag.wav
+*.wav
+
+# ── 🎤 个人语音模型 ────────────────────────────────────────────────────────────
+GPT-SoVITS/GPT_weights/
+GPT-SoVITS/SoVITS_weights/
+GPT-SoVITS/Voice/
+GPT-SoVITS/output/
+GPT-SoVITS/runtime/
+GPT-SoVITS/pretrained_models/
+GPT-SoVITS/ffmpeg.exe
+GPT-SoVITS/ffprobe.exe
+GPT-SoVITS/logs/
+GPT-SoVITS/TEMP/
+GPT-SoVITS/gweight.txt
+GPT-SoVITS/sweight.txt
+
+# ── 🐍 Python ───────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+
+# ── 📦 编译产物 / 分发 ──────────────────────────────────────────────────────────
+dist/
+build/
+release/
+AI_Companion.spec
+
+# ── 📋 日志 ─────────────────────────────────────────────────────────────────────
+*.log
+
+# ── 🖥️ IDE / 工具 ────────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.claude/
+*.swp
+AI_Companion.exe
+
+# ── 🔧 其他 ─────────────────────────────────────────────────────────────────────
+*.spec
+*.zip
