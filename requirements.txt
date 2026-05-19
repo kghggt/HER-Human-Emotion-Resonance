@@ -1,0 +1,6 @@
+PyQt5>=5.15
+openai>=1.0
+requests
+pydub
+simpleaudio
+python-dotenv
