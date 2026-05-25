@@ -1,6 +1,6 @@
 @echo off
 cd /d "%~dp0"
-echo HER v1.0 — Human Emotion Resonance
+echo HER v1.0 - Human Emotion Resonance
 echo.
 echo Starting...
 python assistant.py

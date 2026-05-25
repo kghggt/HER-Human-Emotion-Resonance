@@ -16,81 +16,132 @@ class SettingsDialog(QDialog):
         self.setWindowTitle("设置")
         self.resize(520, 480)
         self.setMinimumSize(460, 400)
-        self.setStyleSheet("""
-            QDialog { background-color: #0A0A1B; }
-            QTabWidget::pane { border: 1px solid #2D2D50; background: #0D0D22; }
-            QTabBar::tab {
-                background: #1E1E38; color: #8888BB; padding: 8px 20px;
-                border: 1px solid #2D2D50; border-bottom: none;
-                border-top-left-radius: 8px; border-top-right-radius: 8px;
-            }
-            QTabBar::tab:selected { background: #0D0D22; color: #E2E8F0; }
-            QLabel { color: #A0A0CC; font-size: 13px; }
-            QLineEdit, QTextEdit, QSpinBox, QComboBox {
-                background: #1E1E38; color: #E2E8F0;
-                border: 1px solid #3D3D6B; border-radius: 6px;
-                padding: 6px 10px; font-size: 13px;
-            }
-            QLineEdit:focus, QTextEdit:focus { border-color: #7C3AED; }
-            QComboBox::drop-down { border: none; }
-            QComboBox QAbstractItemView {
-                background: #1E1E38; color: #E2E8F0;
-                selection-background-color: #7C3AED; border: 1px solid #3D3D6B;
-            }
-            QSlider::groove:horizontal {
-                height: 6px; background: #1E1E38; border-radius: 3px;
-            }
-            QSlider::handle:horizontal {
-                width: 16px; margin: -5px 0; background: #7C3AED;
-                border-radius: 8px;
-            }
-            QPushButton {
-                border-radius: 8px; padding: 8px 20px;
-                font-size: 13px; font-weight: bold;
-            }
-        """)
+        self.setStyleSheet(
+            "QDialog { background-color: #080818; }"
+
+            "QTabWidget::pane {"
+            "  border: 1px solid rgba(99, 102, 241, 0.12);"
+            "  background: #0C0C22; border-radius: 0 0 10px 10px;"
+            "}"
+            "QTabBar::tab {"
+            "  background: rgba(255,255,255,0.03); color: #6B7280;"
+            "  padding: 10px 24px; font-size: 13px; font-weight: 600;"
+            "  border: 1px solid rgba(99, 102, 241, 0.08);"
+            "  border-bottom: none;"
+            "  border-top-left-radius: 10px; border-top-right-radius: 10px;"
+            "  margin-right: 2px;"
+            "}"
+            "QTabBar::tab:selected {"
+            "  background: #0C0C22; color: #E2E8F0;"
+            "  border-bottom: 2px solid #8B5CF6;"
+            "}"
+            "QTabBar::tab:hover:!selected {"
+            "  background: rgba(139, 92, 246, 0.08); color: #A5B4FC;"
+            "}"
+
+            "QLabel { color: #9CA3AF; font-size: 13px; background: transparent; }"
+
+            "QLineEdit, QTextEdit, QSpinBox, QComboBox {"
+            "  background: rgba(255,255,255,0.04); color: #E2E8F0;"
+            "  border: 1.5px solid rgba(99, 102, 241, 0.15);"
+            "  border-radius: 8px; padding: 8px 12px; font-size: 13px;"
+            "}"
+            "QLineEdit:focus, QTextEdit:focus {"
+            "  border-color: rgba(139, 92, 246, 0.5);"
+            "  background: rgba(255,255,255,0.06);"
+            "}"
+            "QSpinBox::up-button, QSpinBox::down-button {"
+            "  background: rgba(139, 92, 246, 0.15);"
+            "  border: none; width: 20px;"
+            "}"
+            "QSpinBox::up-button:hover, QSpinBox::down-button:hover {"
+            "  background: rgba(139, 92, 246, 0.3);"
+            "}"
+
+            "QComboBox::drop-down {"
+            "  border: none; width: 28px;"
+            "}"
+            "QComboBox QAbstractItemView {"
+            "  background: #12122E; color: #E2E8F0;"
+            "  selection-background-color: rgba(139, 92, 246, 0.4);"
+            "  border: 1px solid rgba(99, 102, 241, 0.2);"
+            "  border-radius: 6px; outline: none;"
+            "}"
+
+            "QSlider::groove:horizontal {"
+            "  height: 6px;"
+            "  background: rgba(255,255,255,0.06);"
+            "  border-radius: 3px;"
+            "}"
+            "QSlider::sub-page:horizontal {"
+            "  background: qlineargradient(x1:0,y1:0,x2:1,y2:0,"
+            "    stop:0 #7C3AED, stop:1 #8B5CF6);"
+            "  border-radius: 3px;"
+            "}"
+            "QSlider::handle:horizontal {"
+            "  width: 18px; height: 18px; margin: -6px 0;"
+            "  background: #A78BFA; border-radius: 9px;"
+            "  border: 2px solid #7C3AED;"
+            "}"
+            "QSlider::handle:horizontal:hover {"
+            "  background: #C4B5FD; border-color: #8B5CF6;"
+            "}"
+
+            "QPushButton {"
+            "  border-radius: 10px; padding: 9px 22px;"
+            "  font-size: 13px; font-weight: 700;"
+            "}"
+        )
 
         self._build_ui()
         self._load_values()
 
     def _build_ui(self):
         root = QVBoxLayout(self)
+        root.setContentsMargins(16, 16, 16, 16)
+        root.setSpacing(16)
 
         tabs = QTabWidget()
-        tabs.addTab(self._llm_tab(), "LLM 模型")
-        tabs.addTab(self._tts_tab(), "TTS 语音")
-        tabs.addTab(self._persona_tab(), "角色设定")
+        tabs.addTab(self._llm_tab(), "🤖  LLM 模型")
+        tabs.addTab(self._tts_tab(), "🔊  TTS 语音")
+        tabs.addTab(self._persona_tab(), "✨  角色设定")
         root.addWidget(tabs)
 
         # 底部按钮
         btn_row = QHBoxLayout()
+        btn_row.setSpacing(10)
+
+        _secondary_style = (
+            "QPushButton {"
+            "  background: rgba(255,255,255,0.04);"
+            "  color: #9CA3AF;"
+            "  border: 1px solid rgba(99, 102, 241, 0.12);"
+            "}"
+            "QPushButton:hover {"
+            "  background: rgba(139, 92, 246, 0.12);"
+            "  color: #C4B5FD;"
+            "  border-color: rgba(139, 92, 246, 0.3);"
+            "}")
 
         reset_btn = QPushButton("恢复默认")
-        reset_btn.setStyleSheet("""
-            QPushButton { background: #2D2D50; color: #A0A0CC; }
-            QPushButton:hover { background: #3D3D6B; }
-        """)
+        reset_btn.setStyleSheet(_secondary_style)
         reset_btn.clicked.connect(self._reset_defaults)
 
         cancel_btn = QPushButton("取消")
-        cancel_btn.setStyleSheet("""
-            QPushButton { background: #2D2D50; color: #A0A0CC; }
-            QPushButton:hover { background: #3D3D6B; }
-        """)
+        cancel_btn.setStyleSheet(_secondary_style)
         cancel_btn.clicked.connect(self.reject)
 
-        save_btn = QPushButton("保存")
-        save_btn.setStyleSheet("""
-            QPushButton {
-                background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
-                    stop:0 #7C3AED, stop:1 #DB2777);
-                color: white;
-            }
-            QPushButton:hover {
-                background: qlineargradient(x1:0,y1:0,x2:1,y2:1,
-                    stop:0 #6D28D9, stop:1 #BE185D);
-            }
-        """)
+        save_btn = QPushButton("✓  保存")
+        save_btn.setStyleSheet(
+            "QPushButton {"
+            "  background: qlineargradient(x1:0,y1:0,x2:1,y2:1,"
+            "    stop:0 #7C3AED, stop:1 #DB2777);"
+            "  color: white; border: none;"
+            "}"
+            "QPushButton:hover {"
+            "  background: qlineargradient(x1:0,y1:0,x2:1,y2:1,"
+            "    stop:0 #6D28D9, stop:1 #BE185D);"
+            "}")
         save_btn.clicked.connect(self._save)
 
         btn_row.addWidget(reset_btn)
@@ -101,8 +152,9 @@ class SettingsDialog(QDialog):
 
     def _make_form(self) -> QFormLayout:
         form = QFormLayout()
-        form.setContentsMargins(20, 16, 20, 16)
-        form.setSpacing(10)
+        form.setContentsMargins(24, 20, 24, 20)
+        form.setSpacing(14)
+        form.setLabelAlignment(Qt.AlignRight)
         return form
 
     # ── LLM 页 ───────────────────────────────────────────────────────────────
@@ -152,11 +204,15 @@ class SettingsDialog(QDialog):
         wav_row = QHBoxLayout()
         wav_row.addWidget(self.tts_wav)
         pick_btn = QPushButton("浏览...")
-        pick_btn.setStyleSheet("""
-            QPushButton { background: #2D2D50; color: #A0A0CC;
-                padding: 6px 14px; border-radius: 6px; font-size: 12px; }
-            QPushButton:hover { background: #3D3D6B; }
-        """)
+        pick_btn.setStyleSheet(
+            "QPushButton {"
+            "  background: rgba(139, 92, 246, 0.15); color: #A5B4FC;"
+            "  padding: 8px 16px; border-radius: 8px; font-size: 12px;"
+            "  border: 1px solid rgba(139, 92, 246, 0.2);"
+            "}"
+            "QPushButton:hover {"
+            "  background: rgba(139, 92, 246, 0.25); color: #C4B5FD;"
+            "}")
         pick_btn.clicked.connect(lambda: self._pick_wav())
         wav_row.addWidget(pick_btn)
         form.addRow("参考音频", wav_row)
